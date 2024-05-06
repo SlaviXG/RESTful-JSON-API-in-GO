@@ -3,7 +3,6 @@ package main
 // To get the package: go get github.com/gorilla/mux
 import (
 	"fmt"
-	"html"
 	"log"
 	"net/http"
 
@@ -18,12 +17,22 @@ func main() {
 
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", Index)
+	router.HandleFunc("/todos", TodoIndex)
+	router.HandleFunc("/todos/{todoId}", TodoShow)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	path := html.EscapeString(r.URL.Path)
-	fmt.Fprintf(w, "Received request: %q", path)
-	//For more information: fmt.Println(r.Header)
-	fmt.Printf("Received request: %q\n", path)
+	fmt.Fprintln(w, "Welcome to the basic endpoint!")
+	fmt.Printf("The header of the request looks like:\n%s\n\n", r.Header)
+}
+
+func TodoIndex(w http.ResponseWriter, t *http.Request) {
+	fmt.Fprintln(w, "Todo Index!")
+}
+
+func TodoShow(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	todoId := vars["todoId"]
+	fmt.Fprintln(w, "Todo show:", todoId)
 }
