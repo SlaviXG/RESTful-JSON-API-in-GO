@@ -1,10 +1,13 @@
 package main
 
+// To get the package: go get github.com/gorilla/mux
 import (
 	"fmt"
 	"html"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -13,12 +16,14 @@ func main() {
 
 	fmt.Println("Handling started...")
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		path := html.EscapeString(r.URL.Path)
-		fmt.Fprintf(w, "Received request: %q", path)
-		//For more information: fmt.Println(r.Header)
-		fmt.Printf("Received request: %q\n", path)
-	})
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/", Index)
+	log.Fatal(http.ListenAndServe(":8080", router))
+}
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+func Index(w http.ResponseWriter, r *http.Request) {
+	path := html.EscapeString(r.URL.Path)
+	fmt.Fprintf(w, "Received request: %q", path)
+	//For more information: fmt.Println(r.Header)
+	fmt.Printf("Received request: %q\n", path)
 }
