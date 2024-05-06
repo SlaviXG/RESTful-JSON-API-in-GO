@@ -4,7 +4,7 @@
 This project demonstrates the creation of a RESTful JSON API in Go, focusing on good RESTful design practices. It covers basic web server setup, routing, handling requests, and returning JSON responses.
 
 ## Credits:
-Shout out to to Cory Lanou for explanation.
+Shout-out to to Cory Lanou for explanation.
 
 ## Requirements
 - Go
