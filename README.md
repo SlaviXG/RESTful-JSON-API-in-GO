@@ -29,6 +29,7 @@ go run github.com/SlaviXG/Practice-RESTful-JSON-API-in-GO
 - `/`: Displays a welcome message.
 - `/todos`: Retrieves a list of todos.
 - `/todos/{todoId}`: Retrieves details of a specific todo.
+- `POST /todos`: Creates a new todo.
 
 ## License
 This project is licensed under the MIT License.
