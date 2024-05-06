@@ -34,6 +34,6 @@ var routes = Routes{
 		"TodoCreate",
 		"POST",
 		"/todos",
-		TodoCreate
+		TodoCreate,
 	},
 }
