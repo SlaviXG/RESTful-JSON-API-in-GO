@@ -12,7 +12,7 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Welcome to the basic endpoint!")
-	fmt.Printf("The header of the basic endpoint request looks like:\n%s\n\n", r.Header)
+	// fmt.Printf("The header of the basic endpoint request looks like:\n%s\n\n", r.Header)
 }
 
 func TodoIndex(w http.ResponseWriter, t *http.Request) {
@@ -30,9 +30,12 @@ func TodoShow(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Todo show:", todoId)
 }
 
+// To test, run in the console:
+// curl -H "Content-Type: application/json" -d "{\"Name\":\"New Todo\"}" http://localhost:8080/todos
 func TodoCreate(w http.ResponseWriter, r *http.Request) {
 	var todo Todo
 	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
+
 	if err != nil {
 		panic(err)
 	}
